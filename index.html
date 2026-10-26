@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ndocs</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&family=Mukta&family=Hind&family=Poppins&family=Roboto&family=Open+Sans&family=Lato&family=Montserrat&family=Merriweather&family=Playfair+Display&family=Inconsolata&family=Lora&family=Nunito&display=swap">
 <style id="pgs"></style>
 <style>
 :root{--bg:#fff;--fg:#1f2328;--mut:#656d76;--line:#d0d7de;--head:#f3f4f6;--acc:#1a73e8;--sel:#e8f0fe;--desk:#eef0f3;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -43,9 +44,9 @@ input,select,textarea{background:var(--bg);border:1px solid var(--line);border-r
 #out.on{display:block}#out a{display:block;color:var(--fg);padding:3px 0;cursor:pointer;font-size:13px;text-decoration:none}#out a:hover{color:var(--acc)}
 #out small{color:var(--mut)}
 #sc{flex:1;overflow:auto;background:var(--desk);padding:20px 10px;scroll-behavior:smooth}
-#page{background:#fff;color:#1f2328;margin:0 auto;box-shadow:0 1px 8px rgba(0,0,0,.25);outline:none;box-sizing:border-box;width:var(--w,794px);max-width:100%;min-height:var(--h,1123px);padding:72px;font:16px/1.5 Arial,sans-serif;overflow-wrap:anywhere}
+#page{background:#fff;color:#1f2328;margin:0 auto;box-shadow:0 1px 8px rgba(0,0,0,.25);outline:none;box-sizing:border-box;width:var(--w,794px);max-width:100%;min-height:var(--h,1123px);padding:72px;font:var(--fs,16px)/1.5 var(--ff,Arial,sans-serif);overflow-wrap:anywhere}
 #page p,#page div{margin:0 0 8px}
-#page h1{font-size:28px;margin:12px 0 8px}#page h2{font-size:22px;margin:10px 0 6px}#page h3{font-size:18px;margin:8px 0 6px}
+#page h1{font-size:var(--h1,28px);margin:12px 0 8px}#page h2{font-size:var(--h2,22px);margin:10px 0 6px}#page h3{font-size:var(--h3,18px);margin:8px 0 6px}#page th{background:#f0f0f0;text-align:left}
 #page blockquote{margin:8px 0;padding-left:12px;border-left:3px solid #bbb;color:#555}
 #page table{border-collapse:collapse;width:100%;margin:8px 0}#page td,#page th{border:1px solid #999;padding:6px;min-width:40px;vertical-align:top}
 #page img{max-width:100%}#page img.on{outline:2px solid var(--acc)}
@@ -65,8 +66,12 @@ input,select,textarea{background:var(--bg);border:1px solid var(--line);border-r
 .ov .bs{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}.ov .mb{display:block;width:100%;text-align:left;margin-bottom:6px}
 #toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,20px);background:#222;color:#fff;padding:8px 14px;border-radius:8px;opacity:0;pointer-events:none;transition:.25s;z-index:20}
 #toast.on{opacity:1;transform:translate(-50%,0)}
-@media(max-width:700px){#page{padding:20px!important}}
-@media print{#home,#top,#tb,#ctx,#fr,#out,#stat,.ov,#fx,#toast{display:none!important}html,body{height:auto;display:block}#ed,#body,#sc{display:block!important;overflow:visible;padding:0;background:#fff}#page{box-shadow:none;margin:0;width:auto;max-width:none;min-height:0;padding:0!important}}
+.cm{background:#fff3a3;border-bottom:2px solid #f5c400;cursor:pointer}.tbx{border:1px solid #888;padding:8px;margin:8px 0;min-height:30px}.fnotes{border-top:1px solid #bbb;margin-top:24px;padding-top:6px;font-size:13px}
+#cmt{width:240px;border-left:1px solid var(--line);overflow:auto;padding:10px;flex:none;display:none}#cmt.on{display:block}#cmt .ci{border:1px solid var(--line);border-radius:8px;padding:8px;margin-bottom:8px;font-size:13px;cursor:pointer}
+#sym{display:grid;grid-template-columns:repeat(8,1fr);gap:4px}#sym button{padding:6px 0;font-size:18px;min-width:0}
+#stat{display:flex;gap:10px;align-items:center}#stat select{padding:1px 4px}#fsz{width:58px;flex:none}#ctx input[type=color]{width:30px;height:26px;padding:0}#ctx button{padding:3px 8px}
+@media(max-width:700px){#page{padding:20px!important}#cmt{display:none!important}}
+@media print{#cmt,#home,#top,#tb,#ctx,#fr,#out,#stat,.ov,#fx,#toast{display:none!important}html,body{height:auto;display:block}#ed,#body,#sc{display:block!important;overflow:visible;padding:0;background:#fff}#page{box-shadow:none;margin:0;width:auto;max-width:none;min-height:0;padding:0!important}}
 </style>
 </head>
 <body>
@@ -83,19 +88,19 @@ input,select,textarea{background:var(--bg);border:1px solid var(--line);border-r
     <button data-c="undo" title="Undo">↶</button><button data-c="redo" title="Redo">↷</button><i></i>
     <select id="blk"><option value="p">Normal</option><option value="h1">Heading 1</option><option value="h2">Heading 2</option><option value="h3">Heading 3</option><option value="blockquote">Quote</option></select>
     <select id="fnt"><option>Arial</option><option>Georgia</option><option>Times New Roman</option><option>Courier New</option><option>Verdana</option><option>Trebuchet MS</option><option>Tahoma</option></select>
-    <select id="fsz"><option>10</option><option>12</option><option>14</option><option selected>16</option><option>18</option><option>24</option><option>32</option><option>48</option></select><i></i>
+    <button id="fm" title="Smaller">−</button><input id="fsz" type="number" list="fl" value="16" min="6" max="300" step="0.5" title="Font size (type any number)"><button id="fp" title="Larger">+</button><datalist id="fl"><option>8<option>9<option>10<option>11<option>12<option>14<option>16<option>18<option>20<option>24<option>28<option>32<option>36<option>48<option>60<option>72<option>96</datalist><i></i>
     <button data-c="bold" title="Bold"><b>B</b></button><button data-c="italic" title="Italic"><em>I</em></button><button data-c="underline" title="Underline"><u>U</u></button><button data-c="strikeThrough" title="Strikethrough"><s>S</s></button><button data-c="superscript">x²</button><button data-c="subscript">x₂</button>
     <input type="color" id="fc" value="#000000" title="Text color"><input type="color" id="hc" value="#ffff00" title="Highlight"><i></i>
     <button data-c="justifyLeft" title="Align left">⬅</button><button data-c="justifyCenter" title="Center">↔</button><button data-c="justifyRight" title="Align right">➡</button><button data-c="justifyFull" title="Justify">☰</button>
     <select id="lh" title="Line spacing"><option value="">Spacing</option><option>1</option><option>1.15</option><option>1.5</option><option>2</option></select><i></i>
-    <button data-c="insertUnorderedList" title="Bullets">• List</button><button data-c="insertOrderedList" title="Numbers">1. List</button><button id="ck" title="Checklist">☑</button><button data-c="outdent">⇤</button><button data-c="indent">⇥</button><i></i>
-    <button id="itb" title="Table">▦</button><button id="iim" title="Image">🖼</button><button id="ilk" title="Link">🔗</button><button id="ihr" title="Line">―</button><button id="ipb" title="Page break">⤓</button><button id="itc" title="Table of contents">☷</button><button data-c="removeFormat" title="Clear formatting">⌫</button>
+    <button data-c="insertUnorderedList" title="Bullets">• List</button><button data-c="insertOrderedList" title="Numbers">1. List</button><button id="ck" title="Checklist">☑</button><button id="ipf" title="Paragraph: spacing, indent, background, border">¶</button><button id="ipt" title="Format painter">🖌</button><button data-c="outdent">⇤</button><button data-c="indent">⇥</button><i></i>
+    <button id="itb" title="Table">▦</button><button id="iim" title="Image">🖼</button><button id="ilk" title="Link">🔗</button><button id="ihr" title="Line">―</button><button id="ipb" title="Page break">⤓</button><button id="itc" title="Table of contents">☷</button><button id="itx" title="Text box">▭</button><button id="ish" title="Shapes">◇</button><button id="ich" title="Chart">📊</button><button id="isy" title="Symbols & emoji">Ω</button><button id="idt" title="Date & time">📅</button><button id="ifn" title="Footnote">fn</button><button id="icm" title="Comment">💬</button><button id="imc" title="Voice typing">🎤</button><button data-c="removeFormat" title="Clear formatting">⌫</button>
     <input type="file" id="img" accept="image/*" hidden>
   </div>
   <div id="ctx"></div>
   <div id="fr"><input id="fq" placeholder="Find"><input id="fr2" placeholder="Replace with"><button id="fn">Next</button><button id="frp">Replace</button><button id="fra">Replace all</button><button id="fcl">✕</button></div>
-  <div id="body"><aside id="out"></aside><div id="sc"><div id="page" contenteditable="true" spellcheck="true"></div></div></div>
-  <div id="stat"></div>
+  <div id="body"><aside id="out"></aside><div id="sc"><div id="page" contenteditable="true" spellcheck="true"></div></div><aside id="cmt"></aside></div>
+  <div id="stat"><span id="sw"></span><span style="flex:1"></span>Zoom <select id="zm"><option>50</option><option>75</option><option>90</option><option selected>100</option><option>125</option><option>150</option><option>200</option></select>%</div>
 </div>
 <button id="fx">Exit focus</button>
 <div class="ov" id="md"><div><h3 id="mt"></h3><div id="mb"></div></div></div>
@@ -174,7 +179,7 @@ function openDoc(d){cur=d;$('home').style.display='none';$('ed').style.display='
   if(innerWidth>900)$('out').classList.add('on');else $('out').classList.remove('on')}
 function snap(){if(!cur)return;cur.html=page.innerHTML;if(cur.versions[0]&&cur.versions[0].html===cur.html)return;cur.versions.unshift({t:Date.now(),html:cur.html});cur.versions.length=Math.min(cur.versions.length,15)}
 function flush(leave){cur.html=page.innerHTML;cur.title=$('ti').value.trim()||'Untitled document';cur.updated=Date.now();if(leave&&(!cur.versions[0]||Date.now()-cur.versions[0].t>600000))snap();save()}
-function upd(){const t=page.innerText.trim();$('stat').textContent=(t?t.split(/\s+/).length:0)+' words · '+t.length+' characters'}
+function upd(){const t=page.innerText.trim();$('sw').textContent=(t?t.split(/\s+/).length:0)+' words · '+t.length+' characters'}
 function outline(){const hs=[...page.querySelectorAll('h1,h2,h3')];$('out').innerHTML='<small>OUTLINE</small>'+(hs.length?'':'<br><small>Add headings to see them here.</small>');
   hs.forEach(h=>{const a=document.createElement('a');a.textContent=h.textContent||'(empty)';a.style.paddingLeft=(h.tagName[1]-1)*12+'px';a.onclick=()=>h.scrollIntoView({behavior:'smooth',block:'start'});$('out').appendChild(a)})}
 function fire(){page.dispatchEvent(new Event('input'))}
@@ -251,6 +256,597 @@ document.addEventListener('keydown',e=>{
   if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();snap();save();toast('Version saved')}
   if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='f'){e.preventDefault();$('bf').click()}});
 $('blk').addEventListener('mousedown',saveSel);
+home();
+</script>
+<script>
+const FONTS=['Arial','Georgia','Times New Roman','Courier New','Verdana','Trebuchet MS','Tahoma','Calibri','Cambria','Garamond','Segoe UI','Roboto','Open Sans','Lato','Montserrat','Poppins','Merriweather','Playfair Display','Lora','Nunito','Inconsolata','Noto Sans Devanagari','Mukta','Hind'];
+$('fnt').innerHTML=FONTS.map(f=>`<option style='font-family:${f}'>${f}</option>`).join('');
+/* page, margins, defaults, header/footer */
+function applyPage(p){const[w,h]=p.size==='Custom'?[p.cw||794,p.ch||1123]:(SZ[p.size]||SZ.A4),L=p.o==='landscape',st=page.style,W=L?h:w,H=L?w:h;
+ st.setProperty('--w',W+'px');st.setProperty('--h',H+'px');
+ const m=[p.mt,p.mr,p.mb,p.ml].map(x=>x==null?p.m:x);st.padding=m.map(x=>x+'px').join(' ');st.background=p.bg;st.columnCount=p.cols>1?p.cols:'auto';st.columnGap='32px';
+ st.setProperty('--ff',`'${p.ff||'Arial'}',Arial,sans-serif`);st.setProperty('--fs',(p.fs||16)+'px');st.setProperty('--h1',(p.h1||28)+'px');st.setProperty('--h2',(p.h2||22)+'px');st.setProperty('--h3',(p.h3||18)+'px');st.lineHeight=p.lh||1.5;
+ const x=p.hf||{},q=s=>JSON.stringify(String(s||''));
+ $('pgs').textContent=`@page{size:${p.size==='Custom'?W+'px '+H+'px':p.size+' '+p.o};margin:${m.map(v=>v*.75+'pt').join(' ')};${x.h?`@top-center{content:${q(x.h)}}`:''}${x.f||x.n?`@bottom-center{content:${q(x.f)}${x.n?' " Page " counter(page)':''}}`:''}}`}
+function setup(){const p=cur.page,g=k=>p[k]==null?p.m:p[k];ask('Page setup',[{k:'s',l:'Paper size',o:[...Object.keys(SZ),'Custom'],v:p.size},{k:'cw',l:'Custom width (px)',t:'number',v:p.cw||794},{k:'ch',l:'Custom height (px)',t:'number',v:p.ch||1123},{k:'o',l:'Orientation',o:['portrait','landscape'],v:p.o},{k:'c',l:'Columns',o:['1','2','3'],v:String(p.cols)},{k:'mt',l:'Top margin (px)',t:'number',v:g('mt')},{k:'mb',l:'Bottom margin (px)',t:'number',v:g('mb')},{k:'ml',l:'Left margin (px)',t:'number',v:g('ml')},{k:'mr',l:'Right margin (px)',t:'number',v:g('mr')},{k:'b',l:'Page color',t:'color',v:p.bg}],'Apply',v=>{Object.assign(cur.page,{size:v.s,cw:+v.cw,ch:+v.ch,o:v.o,cols:+v.c,mt:+v.mt,mb:+v.mb,ml:+v.ml,mr:+v.mr,bg:v.b});applyPage(cur.page);save()})}
+function defaults(){const p=cur.page;ask('Document defaults',[{k:'f',l:'Default font',o:FONTS,v:p.ff||'Arial'},{k:'s',l:'Default size (px)',t:'number',v:p.fs||16},{k:'h1',l:'Heading 1 size (px)',t:'number',v:p.h1||28},{k:'h2',l:'Heading 2 size (px)',t:'number',v:p.h2||22},{k:'h3',l:'Heading 3 size (px)',t:'number',v:p.h3||18},{k:'lh',l:'Line height',t:'number',v:p.lh||1.5}],'Apply',v=>{Object.assign(cur.page,{ff:v.f,fs:+v.s,h1:+v.h1,h2:+v.h2,h3:+v.h3,lh:+v.lh});applyPage(cur.page);save()})}
+function hf(){const h=cur.page.hf||{};ask('Header, footer & page numbers',[{k:'h',l:'Header text (printed on every page)',v:h.h||''},{k:'f',l:'Footer text',v:h.f||''},{k:'n',l:'Page numbers',o:['No','Yes'],v:h.n?'Yes':'No'}],'Save',v=>{cur.page.hf={h:v.h,f:v.f,n:v.n==='Yes'};applyPage(cur.page);save();toast('Shown in Print / Save as PDF (use latest Chrome or Edge)')})}
+/* font size +/- and live size */
+const fs=$('fsz');
+const bump=d=>{fs.value=Math.max(6,+fs.value+d);fs.onchange({target:fs})};
+$('fm').onclick=()=>bump(-1);$('fp').onclick=()=>bump(1);$('fm').onmousedown=$('fp').onmousedown=e=>e.preventDefault();
+document.addEventListener('selectionchange',()=>{if(!cur||document.activeElement===fs)return;const n=getSelection().anchorNode,el=n&&(n.nodeType===1?n:n.parentElement);if(el&&page.contains(el))fs.value=parseFloat(getComputedStyle(el).fontSize)});
+/* paragraph settings */
+const blocks=()=>{const s=getSelection();return s.rangeCount?[...page.querySelectorAll('p,h1,h2,h3,li,blockquote,div')].filter(b=>s.containsNode(b,true)):[]};
+$('ipf').onclick=()=>{saveSel();ask('Paragraph',[{k:'lh',l:'Line height (e.g. 1.5)',t:'number',v:1.5},{k:'sb',l:'Space before (px)',t:'number',v:0},{k:'sa',l:'Space after (px)',t:'number',v:8},{k:'ls',l:'Letter spacing (px)',t:'number',v:0},{k:'fi',l:'First-line indent (px)',t:'number',v:0},{k:'bg',l:'Background color',t:'color',v:'#ffffff'},{k:'bd',l:'Border',o:['none','thin','thick'],v:'none'}],'Apply',v=>{restore();blocks().forEach(b=>{b.style.lineHeight=v.lh;b.style.marginTop=v.sb+'px';b.style.marginBottom=v.sa+'px';b.style.letterSpacing=v.ls+'px';b.style.textIndent=v.fi+'px';b.style.background=v.bg==='#ffffff'?'':v.bg;b.style.border=v.bd==='none'?'':(v.bd==='thin'?'1px':'3px')+' solid #555'});fire()})};
+/* format painter */
+let fp=null;
+$('ipt').onclick=()=>{const n=getSelection().anchorNode,el=n&&(n.nodeType===1?n:n.parentElement);if(!el||!page.contains(el))return toast('Place the cursor in formatted text first');const c=getComputedStyle(el);fp={f:c.fontFamily,s:c.fontSize,c:c.color,b:+c.fontWeight>=600,i:c.fontStyle==='italic',u:c.textDecorationLine.includes('underline')};toast('Now select the text to format')};
+page.addEventListener('mouseup',()=>{if(!fp||getSelection().isCollapsed)return;const p=fp;fp=null;ex('fontName',p.f.split(',')[0].replace(/["']/g,''));ex('foreColor',p.c);ex('fontSize',7);page.querySelectorAll('font[size="7"]').forEach(f=>{f.removeAttribute('size');f.style.fontSize=p.s});['bold','italic','underline'].forEach((k,j)=>{if(document.queryCommandState(k)!==[p.b,p.i,p.u][j])ex(k)});fire()});
+/* insert: text box, shapes, chart, symbols, date, footnote */
+$('itx').onclick=()=>ex('insertHTML','<div class=\'tbx\'>Text box</div><p><br></p>');
+$('ish').onclick=()=>{saveSel();ask('Insert shape',[{k:'t',l:'Shape',o:['Rectangle','Rounded rectangle','Circle','Triangle','Arrow','Line'],v:'Rectangle'},{k:'f',l:'Fill color',t:'color',v:'#cfe2ff'},{k:'s',l:'Border color',t:'color',v:'#1a73e8'},{k:'w',l:'Width (px)',t:'number',v:160},{k:'h',l:'Height (px)',t:'number',v:90}],'Insert',v=>{const W=+v.w||100,H=+v.h||60,a=`fill='${v.f}' stroke='${v.s}' stroke-width='2'`;const S={Rectangle:`<rect x='2' y='2' width='${W-4}' height='${H-4}' ${a}/>`,'Rounded rectangle':`<rect x='2' y='2' width='${W-4}' height='${H-4}' rx='16' ${a}/>`,Circle:`<ellipse cx='${W/2}' cy='${H/2}' rx='${W/2-2}' ry='${H/2-2}' ${a}/>`,Triangle:`<polygon points='${W/2},2 ${W-2},${H-2} 2,${H-2}' ${a}/>`,Arrow:`<polygon points='2,${H*.3} ${W*.6},${H*.3} ${W*.6},2 ${W-2},${H/2} ${W*.6},${H-2} ${W*.6},${H*.7} 2,${H*.7}' ${a}/>`,Line:`<line x1='2' y1='${H/2}' x2='${W-2}' y2='${H/2}' stroke='${v.s}' stroke-width='3'/>`}[v.t];restore();ex('insertHTML',`<svg width='${W}' height='${H}' viewBox='0 0 ${W} ${H}' style='vertical-align:middle'>${S}</svg>&nbsp;`)})};
+$('ich').onclick=()=>{saveSel();ask('Insert bar chart',[{k:'t',l:'Title',v:'Sales'},{k:'d',l:'Data (Label:Value, comma separated)',v:'Jan:10, Feb:25, Mar:18, Apr:30'},{k:'c',l:'Bar color',t:'color',v:'#1a73e8'}],'Insert',v=>{const d=v.d.split(',').map(x=>x.split(':')).map(([a,b])=>[(a||'').trim(),+b]).filter(x=>x[0]&&!isNaN(x[1]));if(!d.length)return;const M=Math.max(...d.map(x=>x[1]),1),W=480,H=260,bw=(W-60)/d.length;let s=`<svg width='${W}' height='${H}' viewBox='0 0 ${W} ${H}' style='max-width:100%'><text x='${W/2}' y='20' text-anchor='middle' font-size='15' font-weight='bold' fill='#333'>${esc(v.t)}</text><line x1='40' y1='${H-40}' x2='${W-10}' y2='${H-40}' stroke='#888'/>`;d.forEach(([l,n],i)=>{const h=(n/M)*(H-90),x=45+i*bw;s+=`<rect x='${x}' y='${H-40-h}' width='${bw*.7}' height='${h}' fill='${v.c}'/><text x='${x+bw*.35}' y='${H-24}' text-anchor='middle' font-size='12' fill='#333'>${esc(l)}</text><text x='${x+bw*.35}' y='${H-44-h}' text-anchor='middle' font-size='11' fill='#333'>${n}</text>`});restore();ex('insertHTML',s+'</svg><p><br></p>')})};
+const SYM='© ® ™ ° ± × ÷ ₹ € £ ¥ § ¶ • … – — ← → ↑ ↓ ↔ ✓ ✗ ★ ☆ ♥ ☎ ✉ ✔ ✘ ≈ ≠ ≤ ≥ ∞ √ π Ω α β µ ½ ¼ ¾ ² ³ 😀 😊 👍 🙏 🎉 ✨ 🔥 ✅ ❌ ⭐ 📌 📞 📧 🕒 💡 📅 💰'.split(' ');
+$('isy').onclick=()=>{saveSel();const b=modal('Symbols & emoji','<div id=\'sym\'>'+SYM.map(c=>`<button>${c}</button>`).join('')+'</div>');b.onclick=e=>{const t=e.target;if(t.tagName==='BUTTON'){closeM();restore();ex('insertText',t.textContent)}}};
+$('idt').onclick=()=>ex('insertText',new Date().toLocaleString('en-GB',{dateStyle:'long',timeStyle:'short'}));
+$('ifn').onclick=()=>{saveSel();ask('Insert footnote',[{k:'t',l:'Footnote text',v:''}],'Insert',v=>{if(!v.t)return;restore();let f=page.querySelector('.fnotes');if(!f){f=document.createElement('div');f.className='fnotes';page.appendChild(f)}const n=f.querySelectorAll('p').length+1;ex('insertHTML',`<sup>[${n}]</sup>`);const p=document.createElement('p');p.textContent=`[${n}] ${v.t}`;f.appendChild(p);fire()})};
+/* comments */
+function cmts(){const c=$('cmt'),l=[...page.querySelectorAll('.cm')];c.innerHTML='<small>COMMENTS</small>'+(l.length?'':'<br><small>Select text and click 💬 to add a comment.</small>');l.forEach(s=>{const d=document.createElement('div');d.className='ci';d.innerHTML=`<i>“${esc(s.textContent.slice(0,40))}”</i><br>${esc(s.dataset.c)}<br>`;const b=document.createElement('button');b.textContent='Resolve';b.onclick=e=>{e.stopPropagation();s.replaceWith(...s.childNodes);fire();cmts()};d.appendChild(b);d.onclick=()=>s.scrollIntoView({behavior:'smooth',block:'center'});c.appendChild(d)})}
+$('icm').onclick=()=>{saveSel();if(!rng||rng.collapsed)return toast('Select some text to comment on');const txt=rng.toString();ask('Add comment',[{k:'t',l:'Comment',v:''}],'Add',v=>{if(!v.t)return;restore();ex('insertHTML',`<span class='cm' data-c='${esc(v.t).replace(/'/g,'&#39;')}'>${esc(txt)}</span>`);$('cmt').classList.add('on');cmts()})};
+page.addEventListener('input',()=>{if($('cmt').classList.contains('on'))cmts()});
+/* voice typing */
+let rec=null;
+$('imc').onclick=()=>{const R=window.SpeechRecognition||window.webkitSpeechRecognition;if(!R)return toast('Voice typing needs Chrome or Edge.');if(rec){rec.stop();return}saveSel();ask('Voice typing',[{k:'l',l:'Language',o:['English (India)','Hindi','English (US)'],v:'English (India)'}],'Start',v=>{rec=new R();rec.lang={'English (India)':'en-IN',Hindi:'hi-IN','English (US)':'en-US'}[v.l];rec.continuous=true;rec.onresult=e=>ex('insertText',e.results[e.results.length-1][0].transcript+' ');rec.onend=()=>{rec=null;$('imc').textContent='🎤'};rec.start();$('imc').textContent='⏹';restore()})};
+$('zm').onchange=e=>{page.style.zoom=e.target.value/100};
+/* image and table tools */
+function ctx(){if($('ctx').contains(document.activeElement)&&document.activeElement.tagName==='INPUT')return;const n=getSelection().anchorNode,el=n&&(n.nodeType===1?n:n.parentElement),td=el&&page.contains(el)&&el.closest('td,th'),c=$('ctx'),B=(x,t)=>`<button data-x='${x}'>${t}</button>`;
+ if(img){c.style.display='flex';c.innerHTML='<b>Image:</b>'+[25,50,75,100].map(p=>`<button data-w='${p}'>${p}%</button>`).join('')+B('il','Left')+B('ic','Center')+B('ir','Right')+B('fl','Wrap left')+B('fr','Wrap right')+B('is','Size…')+B('ib','Border')+B('ia','Alt text')+B('di','Delete')}
+ else if(td){c.style.display='flex';c.innerHTML='<b>Table:</b>'+B('ar','+ Row')+B('ac','+ Col')+B('dr','− Row')+B('dc','− Col')+B('mg','Merge →')+B('hd','Header row')+B('cw','Col width…')+B('rh','Row height…')+B('tb','Borders…')+"<input type='color' id='cbg' value='#ffff99' title='Cell color'>"+B('dt','Delete table')}
+ else c.style.display='none';c._td=td}
+$('ctx').onmousedown=e=>{if(e.target.tagName!=='INPUT')e.preventDefault()};
+$('ctx').oninput=e=>{if(e.target.id==='cbg'&&$('ctx')._td){$('ctx')._td.style.background=e.target.value;fire()}};
+$('ctx').onclick=e=>{const b=e.target.closest('button');if(!b)return;const x=b.dataset.x,w=b.dataset.w;
+ if(img){const im=img;
+  if(w){im.style.width=w+'%';im.style.height='auto';fire();return}
+  if(x==='di'){im.remove();img=null;fire();ctx();return}
+  if(x==='il'||x==='ic'||x==='ir'){im.style.float='none';im.style.display='block';im.style.margin={il:'0 auto 0 0',ic:'0 auto',ir:'0 0 0 auto'}[x];fire();return}
+  if(x==='fl'||x==='fr'){im.style.float=x==='fl'?'left':'right';im.style.display='';im.style.margin=x==='fl'?'0 12px 8px 0':'0 0 8px 12px';fire();return}
+  if(x==='is')ask('Image size',[{k:'w',l:'Width (px)',t:'number',v:Math.round(im.width)},{k:'h',l:'Height (px, 0 = automatic)',t:'number',v:0}],'Apply',v=>{im.style.width=(+v.w||im.width)+'px';im.style.height=+v.h?v.h+'px':'auto';fire()});
+  if(x==='ib'){im.style.border=im.style.border?'':'2px solid #555';fire()}
+  if(x==='ia')ask('Alt text',[{k:'a',l:'Description',v:im.alt||''}],'Save',v=>{im.alt=v.a;fire()});
+  return}
+ const td=$('ctx')._td;if(!td)return;const tr=td.parentNode,i=td.cellIndex,t=td.closest('table');
+ if(x==='ar'){const n=tr.cloneNode(true);n.querySelectorAll('td,th').forEach(c=>c.innerHTML='<br>');tr.after(n)}
+ else if(x==='ac')[...t.rows].forEach(r=>r.insertCell(i+1).innerHTML='<br>');
+ else if(x==='dr')tr.remove();else if(x==='dc')[...t.rows].forEach(r=>r.cells[i]&&r.deleteCell(i));else if(x==='dt')t.remove();
+ else if(x==='mg'){const nx=td.nextElementSibling;if(nx){td.colSpan=(td.colSpan||1)+(nx.colSpan||1);if(nx.textContent.trim())td.innerHTML+=' '+nx.innerHTML;nx.remove()}}
+ else if(x==='hd'){[...t.rows[0].cells].forEach(c=>{if(c.tagName==='TD'){const h=document.createElement('th');h.innerHTML=c.innerHTML;h.colSpan=c.colSpan;h.style.cssText=c.style.cssText;c.replaceWith(h)}})}
+ else if(x==='cw')ask('Column width',[{k:'w',l:'Width (px)',t:'number',v:td.offsetWidth}],'Apply',v=>{[...t.rows].forEach(r=>r.cells[i]&&(r.cells[i].style.width=v.w+'px'));fire()});
+ else if(x==='rh')ask('Row height',[{k:'h',l:'Height (px)',t:'number',v:tr.offsetHeight}],'Apply',v=>{[...tr.cells].forEach(c=>c.style.height=v.h+'px');fire()});
+ else if(x==='tb')ask('Table borders',[{k:'c',l:'Border color',t:'color',v:'#999999'},{k:'w',l:'Border width (px)',t:'number',v:1}],'Apply',v=>{t.querySelectorAll('td,th').forEach(c=>c.style.border=v.w+'px solid '+v.c);fire()});
+ fire();ctx()};
+/* file menu */
+$('bm').onclick=()=>{flush();const it=[['Print / Save as PDF',()=>setTimeout(()=>window.print(),150)],['Download Word (.doc)',()=>dl(fname()+'.doc','application/msword','<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"></head><body>'+page.innerHTML+'</body></html>')],['Download HTML',()=>dl(fname()+'.html','text/html','<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+esc(cur.title)+'</title></head><body>'+page.innerHTML+'</body></html>')],['Download text',()=>dl(fname()+'.txt','text/plain',page.innerText)],['Save version (Ctrl+S)',()=>{snap();save();toast('Version saved')}],['Version history',hist],['Page setup (size, margins, columns)',setup],['Document defaults (font, heading sizes)',defaults],['Header, footer & page numbers',hf],['Read mode on/off',()=>{const e=page.contentEditable==='true';page.contentEditable=!e;toast(e?'Read mode on':'Editing on')}],['Comments panel',()=>{$('cmt').classList.toggle('on');cmts()}]];const b=modal('File',it.map((x,i)=>`<button class="mb" data-i="${i}">${x[0]}</button>`).join(''));b.onclick=e=>{const i=e.target.dataset.i;if(i==null)return;closeM();it[i][1]()}};
+</script>
+<script>
+/* ===== Update 2: 40+ templates ===== */
+const cs=document.createElement('style');cs.textContent='#tpl{display:block;overflow:visible}.cats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}.cats button.on{background:var(--acc);color:#fff;border-color:var(--acc)}.tg{display:flex;flex-wrap:wrap;gap:10px}.tg.cl{max-height:122px;overflow:hidden}.tmb{margin-top:8px}';document.head.appendChild(cs);
+const cell=(c,h)=>`<${h?'th':'td'}>${c===''||c==='..'?'<br>':c}</${h?'th':'td'}>`;
+const T=s=>s.split('\n').map(l=>{l=l.trim();if(!l)return'';if(l[0]==='<')return l;const i=l.indexOf(':'),k=l.slice(0,i),v=l.slice(i+1).trim();
+ if(/^h[123]$/.test(k))return`<${k}>${v}</${k}>`;
+ if(k==='p')return`<p>${v}</p>`;if(k==='c')return`<p style='text-align:center'>${v}</p>`;if(k==='q')return`<blockquote>${v}</blockquote>`;
+ if(k==='ul'||k==='ol'||k==='chk')return`<${k==='ol'?'ol':'ul'}${k==='chk'?" class='chk'":''}>${v.split('|').map(x=>`<li>${x}</li>`).join('')}</${k==='ol'?'ol':'ul'}>`;
+ if(k==='t'||k==='k'){const R=v.split('//').map(r=>r.split('|'));return'<table>'+R.map((r,ri)=>'<tr>'+r.map((c,ci)=>k==='t'?cell(c,ri===0):(ci%2===0?cell(`<b>${c}</b>`):cell(c))).join('')+'</tr>').join('')+'</table><p><br></p>'}
+ return`<p>${l}</p>`}).join('');
+const TC={Basic:['Blank','Letter','Resume','Invoice','Report','Meeting Notes']};
+const TI={Basic:'📄',Business:'💼',Agency:'📣',HR:'👥',Resume:'🧑‍💼',Legal:'⚖️',Education:'🎓',Planning:'🗓️'};
+const add=(c,n,d)=>{TPL[n]=T(d);(TC[c]=TC[c]||[]).push(n)};
+
+/* Business */
+add('Business','Proposal',`h1:Business Proposal
+p:<b>Prepared for:</b> [Client Name] &nbsp;|&nbsp; <b>Prepared by:</b> [Your Company] &nbsp;|&nbsp; <b>Date:</b> [Date]
+h2:1. Executive Summary
+p:[Briefly describe the client's need and how your solution solves it.]
+h2:2. Understanding of Requirements
+ul:[Requirement 1]|[Requirement 2]|[Requirement 3]
+h2:3. Proposed Solution
+p:[Describe your approach, deliverables and method.]
+h2:4. Scope of Work
+t:Deliverable|Description|Timeline//[Item]|[Details]|[Date]//[Item]|[Details]|[Date]
+h2:5. Pricing
+t:Item|Cost (₹)//[Service]|[Amount]//[Service]|[Amount]//<b>Total</b>|<b>[Total]</b>
+h2:6. Terms
+ul:50% advance, balance on delivery|Proposal valid for 15 days|Taxes extra as applicable
+h2:7. About Us
+p:[Short company introduction and past work.]
+p:<b>Accepted by:</b> ______________ &nbsp; <b>Date:</b> ________`);
+add('Business','Quotation',`h1:Quotation
+p:<b>[Your Company]</b><br>[Address] · [Phone] · [Email]<br>GSTIN: [GSTIN]
+p:Quotation No: [QT-001] &nbsp; Date: [Date] &nbsp; Valid until: [Date]
+p:<b>To:</b><br>[Client Name]<br>[Address]
+t:#|Description|Qty|Rate (₹)|Amount (₹)//1|[Item]|[1]|[0]|[0]//2|[Item]|[1]|[0]|[0]//3|[Item]|[1]|[0]|[0]
+p:<b>Subtotal:</b> ₹[0] &nbsp; <b>GST (18%):</b> ₹[0] &nbsp; <b>Total:</b> ₹[0]
+h3:Terms & Conditions
+ul:Prices are valid until the date above|Payment: [terms]|Delivery: [timeline]
+p:For [Your Company]<br><br>Authorised Signatory`);
+add('Business','GST Invoice',`h1:TAX INVOICE
+p:<b>[Your Company]</b><br>[Address]<br>GSTIN: [GSTIN] · PAN: [PAN] · State: [State, Code]
+p:Invoice No: [INV-001] &nbsp; Date: [Date] &nbsp; Due date: [Date]
+t:Bill To|Ship To//[Client Name]<br>[Address]<br>GSTIN: [GSTIN]|[Name]<br>[Address]
+t:#|Description|HSN/SAC|Qty|Rate|Taxable Value|GST %|Amount//1|[Item]|[Code]|[1]|[0]|[0]|[18]|[0]//2|[Item]|[Code]|[1]|[0]|[0]|[18]|[0]
+p:<b>Taxable value:</b> ₹[0]<br><b>CGST (9%):</b> ₹[0]<br><b>SGST (9%):</b> ₹[0]<br><b>IGST (18%):</b> ₹[0] (use for inter-state sales)<br><b>Grand Total:</b> ₹[0]
+p:Amount in words: [Rupees ... only]
+h3:Bank Details
+p:Account Name: [Name]<br>Account No: [Number]<br>IFSC: [Code] · Bank/Branch: [Bank]<br>UPI: [ID]
+p:Terms: Payment due within [15] days. Interest at [x]% p.a. on late payment.
+p:For [Your Company]<br><br>Authorised Signatory`);
+add('Business','Purchase Order',`h1:Purchase Order
+p:PO No: [PO-001] &nbsp; Date: [Date] &nbsp; Delivery by: [Date]
+t:Vendor|Buyer//[Vendor Name]<br>[Address]<br>GSTIN: [GSTIN]|[Company]<br>[Address]<br>GSTIN: [GSTIN]
+t:#|Item|Specification|Qty|Unit Price|Total//1|[Item]|[Spec]|[1]|[0]|[0]//2|[Item]|[Spec]|[1]|[0]|[0]
+p:<b>Subtotal:</b> ₹[0] · <b>GST:</b> ₹[0] · <b>Total:</b> ₹[0]
+h3:Terms
+ul:Payment terms: [e.g., 30 days from delivery]|Delivery address: [Address]|Goods must match the specification, otherwise they may be returned
+p:Authorised by: ______________ &nbsp; Vendor acceptance: ______________`);
+add('Business','Business Plan',`h1:Business Plan
+p:<i>[Company Name] · [Date] · Confidential</i>
+h2:1. Executive Summary
+p:[Mission, product or service, target market and funding need in one page.]
+h2:2. Company Description
+p:[Legal structure, founders, location, vision.]
+h2:3. Market Analysis
+ul:Target customers: [Who]|Market size: [Size]|Competitors: [Names and their weakness]
+h2:4. Products & Services
+p:[What you sell, pricing, unique value.]
+h2:5. Marketing & Sales Strategy
+ul:Channels: [Channels]|Pricing strategy: [Strategy]|Sales process: [Steps]
+h2:6. Operations
+p:[Team, suppliers, tools, location, workflow.]
+h2:7. Financial Plan
+t:Year|Revenue (₹)|Expenses (₹)|Profit (₹)//Year 1|[0]|[0]|[0]//Year 2|[0]|[0]|[0]//Year 3|[0]|[0]|[0]
+h2:8. Funding Required
+p:[Amount, use of funds, expected returns.]
+h2:9. Risks & Mitigation
+t:Risk|Impact|Mitigation//[Risk]|[High / Medium / Low]|[Plan]`);
+add('Business','Project Plan',`h1:Project Plan
+p:<b>Project:</b> [Name] &nbsp; <b>Manager:</b> [Name] &nbsp; <b>Start:</b> [Date] &nbsp; <b>End:</b> [Date]
+h2:Objective
+p:[What success looks like.]
+h2:Scope
+p:<b>In scope:</b> [..]<br><b>Out of scope:</b> [..]
+h2:Milestones & Timeline
+t:Milestone|Owner|Start|Due|Status//[Milestone]|[Name]|[Date]|[Date]|Not started
+h2:Team & Roles
+t:Name|Role|Responsibility//[Name]|[Role]|[Task]
+h2:Budget
+t:Item|Estimated (₹)|Actual (₹)//[Item]|[0]|[0]
+h2:Risks
+ul:[Risk and how you will handle it]
+h2:Communication
+p:[Meeting schedule, reporting, tools.]`);
+add('Business','SOP',`h1:Standard Operating Procedure (SOP)
+k:SOP Title|[Title]//SOP No.|[SOP-001]//Department|[Department]//Version / Date|[1.0] / [Date]//Owner|[Name]
+h2:1. Purpose
+p:[Why this SOP exists.]
+h2:2. Scope
+p:[Who and what it applies to.]
+h2:3. Responsibilities
+ul:[Role]: [responsibility]
+h2:4. Procedure
+ol:[Step 1]|[Step 2]|[Step 3]|[Step 4]
+h2:5. Tools & Materials
+ul:[Tool]
+h2:6. Quality Checks
+chk:[Check 1]|[Check 2]
+h2:7. Revision History
+t:Version|Date|Change|By//1.0|[Date]|Initial release|[Name]`);
+add('Business','Press Release',`h1:[Headline: Short, Clear and Newsworthy]
+p:<i>[Sub-headline with one extra detail]</i>
+p:<b>[City, Date]</b> – [Company] today announced [what]. [Why it matters in one sentence.]
+p:[Second paragraph: key details, numbers, date, availability.]
+q:“[Quote from the founder or leader about the news.]” – [Name, Title]
+p:[Third paragraph: background, benefits, how it works.]
+h3:About [Company]
+p:[Two lines: who you are, what you do, website.]
+h3:Media Contact
+p:[Name]<br>[Email] · [Phone]<br>[Website]
+c:###`);
+add('Business','Client Brief',`h1:Client Brief
+k:Client|[Name]//Project|[Name]//Brief date|[Date]//Deadline|[Date]//Budget|[₹ amount]//Contact|[Name · Phone]
+h2:About the Client
+p:[Business, products, audience.]
+h2:Objective
+p:[What the client wants to achieve.]
+h2:Target Audience
+ul:Age and location: [..]|Interests: [..]|Pain points: [..]
+h2:Deliverables
+chk:[Deliverable 1]|[Deliverable 2]|[Deliverable 3]
+h2:Tone, Style & References
+p:[Brand colours, fonts, tone, competitor or inspiration links.]
+h2:Do's and Don'ts
+t:Do|Don't//[..]|[..]
+h2:Approval Process
+p:[Who approves, how many revision rounds.]`);
+add('Business','Monthly Report',`h1:Monthly Report – [Month Year]
+p:<b>Prepared by:</b> [Name] · <b>Department:</b> [Dept]
+h2:Highlights
+ul:[Key win]|[Key win]|[Key win]
+h2:KPIs
+t:Metric|Target|Actual|Change//[Metric]|[0]|[0]|[+/- %]
+h2:Completed Work
+ul:[Task or project]
+h2:Challenges
+ul:[Issue and impact]
+h2:Next Month's Plan
+chk:[Goal 1]|[Goal 2]|[Goal 3]
+h2:Support Needed
+p:[Decisions, budget or resources needed.]`);
+
+/* Agency */
+add('Agency','Social Media Report',`h1:Social Media Performance Report
+p:<b>Client:</b> [Name] · <b>Period:</b> [Date] – [Date] · <b>Prepared by:</b> [Agency]
+h2:Overview
+p:[Short summary of the month: growth, best post, key learnings.]
+h2:Channel Performance
+t:Platform|Followers|Reach|Engagement|Clicks//Instagram|[0]|[0]|[0%]|[0]//Facebook|[0]|[0]|[0%]|[0]//LinkedIn|[0]|[0]|[0%]|[0]//YouTube|[0]|[0]|[0%]|[0]
+h2:Top Performing Posts
+t:Date|Platform|Post|Reach|Engagement//[Date]|[Platform]|[Topic]|[0]|[0]
+h2:Campaigns & Ads
+t:Campaign|Spend (₹)|Reach|Leads|Cost per lead//[Name]|[0]|[0]|[0]|[0]
+h2:Insights & Learnings
+ul:[What worked]|[What did not]
+h2:Plan for Next Month
+chk:[Action 1]|[Action 2]|[Action 3]`);
+add('Agency','Content Calendar',`h1:Content Calendar – [Month Year]
+p:<b>Client:</b> [Name] · <b>Goal:</b> [e.g., awareness, leads]
+t:Date|Platform|Format|Topic / Caption idea|Creative|Status|Owner//[Date]|Instagram|Reel|[Idea]|[Link]|Planned|[Name]//[Date]|Facebook|Post|[Idea]|[Link]|Planned|[Name]//[Date]|LinkedIn|Article|[Idea]|[Link]|Planned|[Name]//[Date]|Instagram|Story|[Idea]|[Link]|Planned|[Name]//[Date]|YouTube|Video|[Idea]|[Link]|Planned|[Name]
+h3:Festivals & Special Days This Month
+ul:[Date – Festival – Post idea]
+h3:Hashtag Bank
+p:#[tag] #[tag] #[tag]`);
+add('Agency','Client Onboarding',`h1:Client Onboarding Checklist
+p:<b>Client:</b> [Name] · <b>Start date:</b> [Date] · <b>Account manager:</b> [Name]
+h2:1. Before Kick-off
+chk:Proposal and agreement signed|Advance payment received|Point of contact shared|Kick-off call scheduled
+h2:2. Information to Collect
+chk:Brand logo and guidelines|Social media and website access|Competitor list|Target audience details|Past reports
+h2:3. Setup
+chk:Shared drive folder created|WhatsApp or Slack group created|Reporting format agreed|Content approval process agreed
+h2:4. Kick-off Call Notes
+p:[Goals, expectations, timeline, doubts.]
+h2:5. First 30 Days
+t:Week|Focus|Owner//Week 1|[Audit and strategy]|[Name]//Week 2|[Content plan]|[Name]//Week 3|[Launch]|[Name]//Week 4|[First report]|[Name]`);
+add('Agency','Service Agreement',`h1:Service Agreement
+p:This Agreement is made on [Date] between <b>[Agency Name]</b>, [address] (“Service Provider”) and <b>[Client Name]</b>, [address] (“Client”).
+h2:1. Services
+p:The Service Provider will provide: [list services].
+h2:2. Term
+p:This Agreement starts on [Date] and continues until [Date] unless ended earlier under clause 8.
+h2:3. Fees & Payment
+p:The Client will pay ₹[amount] [per month / per project]. Invoices are payable within [7] days. Late payments attract [x]% interest per month. GST is extra.
+h2:4. Client Responsibilities
+p:The Client will provide timely access, content, approvals and feedback needed to deliver the services.
+h2:5. Intellectual Property
+p:On full payment, ownership of the final deliverables passes to the Client. The Service Provider may show the work in its portfolio unless the Client objects in writing.
+h2:6. Confidentiality
+p:Both parties will keep confidential information private during and after this Agreement.
+h2:7. Revisions & Delivery
+p:[Number] rounds of revisions are included. Extra revisions are charged separately.
+h2:8. Termination
+p:Either party may end this Agreement with [30] days written notice. Fees for work done until then remain payable.
+h2:9. Liability
+p:The Service Provider is not liable for indirect losses. Total liability is limited to fees paid in the last [3] months.
+h2:10. Governing Law
+p:This Agreement is governed by the laws of India. Courts at [City] have jurisdiction.
+t:For Service Provider|For Client//Name: ______<br>Sign: ______<br>Date: ______|Name: ______<br>Sign: ______<br>Date: ______
+p:<i>Sample template only. Please have it reviewed by a lawyer before use.</i>`);
+add('Agency','Retainer Agreement',`h1:Monthly Retainer Agreement
+p:Between <b>[Agency]</b> and <b>[Client]</b>, effective [Date].
+h2:1. Retainer Scope
+t:Service|Monthly quantity//[Social posts]|[12]//[Reels / videos]|[4]//[Ad management]|[1 account]//[Reporting]|[Monthly]
+h2:2. Monthly Fee
+p:₹[amount] + GST, payable in advance by the [5th] of each month. Ad spend is paid by the Client separately.
+h2:3. Minimum Term
+p:[3] months. After that, either party may end this with [30] days notice.
+h2:4. Work Outside Scope
+p:Anything outside the scope above is quoted separately and needs written approval.
+h2:5. Response Times
+p:Requests are acknowledged within [1] business day. Standard turnaround: [3] business days.
+h2:6. Unused Deliverables
+p:[Unused monthly deliverables do not carry forward.]
+h2:7. Confidentiality & Ownership
+p:As per the Service Agreement dated [Date].
+p:Signed: ______________ ([Agency]) &nbsp; ______________ ([Client])
+p:<i>Sample template only. Consult a lawyer before use.</i>`);
+
+/* HR */
+add('HR','Offer Letter',`p:[Company Letterhead]
+p:Date: [Date]
+p:To,<br><b>[Candidate Name]</b><br>[Address]
+p:<b>Subject: Offer of Employment – [Designation]</b>
+p:Dear [Name],
+p:We are pleased to offer you the position of <b>[Designation]</b> in the <b>[Department]</b> at <b>[Company]</b>, with a joining date of <b>[Date]</b>.
+t:Compensation|Details//Annual CTC|₹[Amount]//Monthly gross|₹[Amount]//Probation|[3] months//Notice period|[30] days//Work location|[Location]//Working hours|[Hours, days]
+p:This offer is subject to verification of your documents and references. Please bring: ID proof, address proof, education certificates, previous experience and relieving letters, and passport photographs.
+p:Please sign and return a copy of this letter by [Date] as acceptance. Welcome to the team!
+p:Yours sincerely,<br><br><b>[Name]</b><br>[Designation], [Company]
+p:<b>Acceptance:</b> I accept the offer on the above terms. &nbsp; Signature: ________ &nbsp; Date: ________`);
+add('HR','Appointment Letter',`p:[Company Letterhead]
+p:Ref No: [Ref] &nbsp; Date: [Date]
+p:To,<br><b>[Employee Name]</b><br>[Address]
+h3:Subject: Letter of Appointment
+p:Dear [Name], with reference to your application and interviews, you are appointed as <b>[Designation]</b> with effect from <b>[Date]</b>, on the following terms:
+ol:Probation of [6] months, extendable at the company's discretion.|Salary and benefits as per Annexure A.|Working hours: [Hours]; weekly off: [Days].|Leave as per company policy.|Notice period: [30] days by either side after confirmation.|You must keep company information confidential.|Your service is subject to satisfactory background verification.|You will follow company policies as updated from time to time.
+p:Please sign the duplicate copy as acceptance.
+p:For [Company]<br><br><b>[Name], [Designation]</b>
+h3:Annexure A – Salary Structure
+t:Component|Monthly (₹)|Annual (₹)//Basic|[0]|[0]//HRA|[0]|[0]//Special allowance|[0]|[0]//PF (employer)|[0]|[0]//<b>Total CTC</b>|<b>[0]</b>|<b>[0]</b>`);
+add('HR','Experience Letter',`p:[Company Letterhead]
+p:Date: [Date]
+c:<b>TO WHOM IT MAY CONCERN</b>
+p:This is to certify that <b>[Name]</b> was employed with <b>[Company]</b> as <b>[Designation]</b> in the <b>[Department]</b> from <b>[Joining Date]</b> to <b>[Last Working Date]</b>.
+p:During this period, [he/she] was responsible for [key duties]. [His/Her] conduct and performance were [good/excellent], and [he/she] left on [his/her] own accord.
+p:We wish [him/her] every success in the future.
+p:Yours faithfully,<br><br><b>[Name]</b><br>[HR Manager]<br>[Company]`);
+add('HR','Resignation Letter',`p:Date: [Date]
+p:To,<br>[Manager Name]<br>[Designation], [Company]
+p:<b>Subject: Resignation from the post of [Designation]</b>
+p:Dear [Manager Name],
+p:I am writing to resign from my position as [Designation] at [Company]. As per my notice period, my last working day will be <b>[Date]</b>.
+p:I am grateful for the opportunities and support I received here. I will complete pending work and help hand over my responsibilities smoothly.
+p:Please let me know the exit formalities and the full and final settlement process.
+p:Thank you.
+p:Yours sincerely,<br><b>[Your Name]</b><br>Employee ID: [ID]`);
+add('HR','Internship Certificate',`<div style='border:6px double #1a73e8;padding:36px 24px;text-align:center'><h1 style='margin-top:0'>Certificate of Internship</h1><p>This is to certify that</p><h2>[Intern Name]</h2><p>has successfully completed an internship as <b>[Role]</b> in the <b>[Department]</b> at <b>[Company]</b> from <b>[Start Date]</b> to <b>[End Date]</b>.</p><p>During the internship, [he/she] worked on [projects / tasks] and showed [skills, attitude]. We wish [him/her] all the best.</p><p><br></p><p>Date: [Date] &nbsp;&nbsp;&nbsp;&nbsp; Place: [City]</p><p><br>______________________<br><b>[Name]</b><br>[Designation], [Company]</p></div><p><br></p>`);
+add('HR','Leave Application',`p:Date: [Date]
+p:To,<br>[Manager / Principal Name]<br>[Designation], [Company / Institution]
+p:<b>Subject: Application for [type] leave from [Date] to [Date]</b>
+p:Respected Sir/Madam,
+p:I request you to kindly grant me [number] days of [sick / casual / earned] leave from <b>[Start Date]</b> to <b>[End Date]</b> due to [reason].
+p:During my absence, [Name] will handle my urgent work. I can be reached on [phone] if needed.
+p:I shall be grateful for your kind approval.
+p:Yours faithfully,<br><b>[Your Name]</b><br>[Designation / Class and Roll No.]`);
+add('HR','Salary Slip',`h1:Salary Slip – [Month Year]
+p:<b>[Company Name]</b><br>[Address]
+k:Employee Name|[Name]|Employee ID|[ID]//Designation|[Role]|Department|[Dept]//Date of Joining|[Date]|PAN|[PAN]//Bank A/c|[Number]|Days Paid|[Days]
+t:Earnings|Amount (₹)|Deductions|Amount (₹)//Basic|[0]|Provident Fund|[0]//HRA|[0]|Professional Tax|[0]//Special Allowance|[0]|TDS|[0]//Other|[0]|Other|[0]//<b>Gross Earnings</b>|<b>[0]</b>|<b>Total Deductions</b>|<b>[0]</b>
+p:<b>Net Pay: ₹[Amount]</b><br>Amount in words: [Rupees ... only]
+p:<i>This is a computer-generated slip and does not need a signature.</i>`);
+
+/* Resume */
+add('Resume','Resume - Modern',`h1:[YOUR NAME]
+p:<b>[Job Title]</b> · [City] · [Phone] · [Email] · [LinkedIn / Portfolio]
+h2:Profile
+p:[3 lines: years of experience, strongest skills, what you want next.]
+h2:Experience
+p:<b>[Job Title]</b> – [Company], [City] <span style='float:right'>[Mon Year] – [Mon Year]</span>
+ul:Achieved [result] by doing [action], resulting in [number]|Led [project] with a team of [size]|Improved [metric] by [x]%
+p:<b>[Job Title]</b> – [Company], [City] <span style='float:right'>[Mon Year] – [Mon Year]</span>
+ul:[Achievement with numbers]|[Achievement with numbers]
+h2:Education
+p:<b>[Degree]</b> – [University] <span style='float:right'>[Year]</span>
+h2:Skills
+t:Technical|Tools|Soft skills//[Skill]<br>[Skill]|[Tool]<br>[Tool]|[Skill]<br>[Skill]
+h2:Certifications & Awards
+ul:[Certification – Issuer, Year]|[Award]
+h2:Languages
+p:English · Hindi · [Language]`);
+add('Resume','Resume - Classic',`c:<b style='font-size:24px'>[YOUR NAME]</b><br>[Address] · [Phone] · [Email]
+h3:OBJECTIVE
+p:[Seeking a position as ___ where I can use my skills in ___.]
+h3:WORK EXPERIENCE
+p:<b>[Company]</b>, [City] – [Designation] ([Year] – [Year])
+ul:[Responsibility]|[Responsibility]|[Achievement]
+h3:EDUCATION
+t:Qualification|Institute|Year|Score//[Degree]|[University]|[Year]|[%/CGPA]//12th|[School]|[Year]|[%]//10th|[School]|[Year]|[%]
+h3:SKILLS
+ul:[Skill]|[Skill]|[Skill]
+h3:PERSONAL DETAILS
+p:Date of Birth: [DOB]<br>Languages: [Languages]<br>Nationality: Indian
+h3:DECLARATION
+p:I declare that the above information is true to the best of my knowledge.
+p:Date: [Date] &nbsp;&nbsp; Place: [City] &nbsp;&nbsp; Signature: ________`);
+add('Resume','Resume - Fresher',`h1:[YOUR NAME]
+p:[Phone] · [Email] · [City] · [LinkedIn / GitHub]
+h2:Career Objective
+p:[A motivated [degree] graduate seeking an entry-level role in [field] to apply [skills] and grow with the company.]
+h2:Education
+p:<b>[Degree, Branch]</b> – [College], [University] ([Year]) – [CGPA / %]
+h2:Projects
+p:<b>[Project Name]</b> – [Tools used]
+ul:[What it does]|[Your role]|[Result]
+h2:Internships & Training
+p:<b>[Role]</b> – [Company] ([Duration])
+ul:[What you learned or built]
+h2:Skills
+ul:[Skill]|[Skill]|[Skill]
+h2:Achievements & Activities
+ul:[Achievement]|[Club / event / volunteering]`);
+add('Resume','Cover Letter',`p:[Your Name]<br>[Address] · [Phone] · [Email]
+p:[Date]
+p:[Hiring Manager Name]<br>[Company]<br>[Address]
+p:<b>Subject: Application for [Job Title]</b>
+p:Dear [Mr./Ms. Name],
+p:I am excited to apply for the [Job Title] role at [Company]. With [X years] of experience in [field], I have [one key strength or result].
+p:In my role at [Company], I [achievement with number]. I also [another strength relevant to the job]. These match what you are looking for: [requirement from the job ad].
+p:I admire [Company] for [reason]. I would love to bring my skills to your team and contribute to [goal].
+p:Thank you for your time. I would welcome a chance to discuss my application.
+p:Sincerely,<br><b>[Your Name]</b>`);
+
+/* Legal (samples) */
+add('Legal','NDA',`h1:Non-Disclosure Agreement
+p:This Agreement is made on [Date] between <b>[Disclosing Party]</b>, [address] and <b>[Receiving Party]</b>, [address].
+h2:1. Purpose
+p:The parties wish to discuss [purpose] and may share confidential information for that purpose.
+h2:2. Confidential Information
+p:Means all non-public information shared in any form, including business plans, data, designs, code, client lists and pricing.
+h2:3. Obligations
+ul:Use the information only for the stated purpose|Do not disclose it to anyone without written consent|Protect it with reasonable care|Share it only with staff who need it and are bound by confidentiality
+h2:4. Exclusions
+p:This does not cover information that is public, already known to the receiver, independently developed, or lawfully received from a third party.
+h2:5. Term
+p:Obligations last for [2] years from the date above.
+h2:6. Return of Information
+p:On request, the Receiving Party will return or destroy all confidential material.
+h2:7. Governing Law
+p:Indian law applies. Courts at [City] have jurisdiction.
+t:Disclosing Party|Receiving Party//Name: ______<br>Sign: ______<br>Date: ______|Name: ______<br>Sign: ______<br>Date: ______
+p:<i>Sample template only. Consult a lawyer before use.</i>`);
+add('Legal','Rent Agreement',`h1:Rent Agreement
+p:This Agreement is made on [Date] at [City] between <b>[Landlord Name]</b>, [address] (“Landlord”) and <b>[Tenant Name]</b>, [address, ID] (“Tenant”).
+h2:1. Property
+p:The Landlord lets the property at [full address], consisting of [BHK / area] to the Tenant for residential use.
+h2:2. Term
+p:[11] months from [Start Date] to [End Date]. It may be renewed by mutual written agreement.
+h2:3. Rent & Deposit
+k:Monthly rent|₹[Amount], payable by the [5th] of each month//Security deposit|₹[Amount], refundable at vacating after deductions//Maintenance|₹[Amount] / included//Annual increase|[5–10]%
+h2:4. Tenant's Duties
+ul:Pay rent and utility bills on time|Keep the property in good condition|No subletting or illegal activity|No structural changes without written consent
+h2:5. Landlord's Duties
+ul:Give peaceful possession|Do major repairs not caused by the Tenant|Give [15] days notice before inspection
+h2:6. Termination
+p:Either party may end this agreement with [1] month written notice. The deposit will be returned within [15] days of vacating.
+h2:7. Signatures
+t:Landlord|Tenant|Witness//Sign: ______<br>Name: ______|Sign: ______<br>Name: ______|Sign: ______<br>Name: ______
+p:<i>Sample only. Rent agreements may need stamp paper and registration as per your state law. Consult a lawyer.</i>`);
+add('Legal','General Agreement',`h1:General Agreement
+p:Made on [Date] between <b>[Party A]</b>, [address] and <b>[Party B]</b>, [address].
+h2:1. Background
+p:[Why the parties are entering into this agreement.]
+h2:2. Terms
+ol:[Obligation of Party A]|[Obligation of Party B]|[Payment or consideration]|[Timeline and milestones]
+h2:3. Duration
+p:From [Start Date] to [End Date].
+h2:4. Dispute Resolution
+p:Disputes will first be settled by discussion, then by arbitration in [City] under Indian law.
+h2:5. Entire Agreement
+p:This document is the full agreement. Changes must be in writing and signed by both parties.
+t:Party A|Party B//Name: ______<br>Sign: ______<br>Date: ______|Name: ______<br>Sign: ______<br>Date: ______
+p:<i>Sample only. Have a lawyer review it before use.</i>`);
+
+/* Education */
+add('Education','Assignment',`c:<b style='font-size:22px'>[Assignment Title]</b>
+k:Name|[Your Name]//Roll No.|[Roll No.]//Class / Course|[Class]//Subject|[Subject]//Teacher|[Name]//Submission date|[Date]
+h2:Introduction
+p:[Introduce the topic and what this assignment covers.]
+h2:Main Content
+h3:[Point 1]
+p:[Explanation with examples.]
+h3:[Point 2]
+p:[Explanation with examples.]
+h2:Conclusion
+p:[Summarise the key points.]
+h2:References
+ol:[Author, Title, Year]|[Website, Date accessed]`);
+add('Education','Lesson Plan',`h1:Lesson Plan
+k:Teacher|[Name]|Subject|[Subject]//Class|[Class]|Date|[Date]//Topic|[Topic]|Duration|[40 min]
+h2:Learning Objectives
+ul:Students will be able to [objective 1]|Students will be able to [objective 2]
+h2:Materials
+ul:[Textbook, chart, slides, worksheet]
+h2:Lesson Flow
+t:Time|Activity|Method//5 min|Warm-up and recap|[Questions]//15 min|Teach the concept|[Explain with examples]//15 min|Practice|[Group work]//5 min|Assessment|[Quiz]
+h2:Homework
+p:[Task]
+h2:Reflection
+p:[What worked, what to improve.]`);
+add('Education','Research Paper',`c:<b style='font-size:24px'>[Title of the Research Paper]</b><br>[Author Name(s)] · [Institution] · [Date]
+h2:Abstract
+p:[150–250 words: problem, method, results, conclusion.]
+p:<b>Keywords:</b> [word], [word], [word]
+h2:1. Introduction
+p:[Background, problem statement, research question and objectives.]
+h2:2. Literature Review
+p:[Summarise earlier studies and the gap you address.]
+h2:3. Methodology
+p:[Design, sample, data collection, tools, analysis.]
+h2:4. Results
+p:[Findings with tables and charts.]
+h2:5. Discussion
+p:[Meaning of results, limitations, comparison with earlier work.]
+h2:6. Conclusion
+p:[Main findings and future research.]
+h2:References
+ol:[Author (Year). Title. Journal, Volume(Issue), pages.]`);
+add('Education','Study Planner',`h1:Weekly Study Planner
+p:<b>Student:</b> [Name] · <b>Exam / Goal:</b> [Exam] · <b>Week of:</b> [Date]
+t:Day|Subject 1|Subject 2|Subject 3|Revision|Hours//Mon|..|..|..|..|..//Tue|..|..|..|..|..//Wed|..|..|..|..|..//Thu|..|..|..|..|..//Fri|..|..|..|..|..//Sat|..|..|..|..|..//Sun|..|..|..|..|..
+h2:Weekly Goals
+chk:[Finish chapter 1]|[Solve 50 questions]|[Take a mock test]
+h2:Tips
+ul:Study in 45-minute blocks with 10-minute breaks|Revise the same day and again after 7 days|Sleep 7–8 hours`);
+add('Education','Essay',`h1:[Essay Title]
+p:<i>[Your Name] · [Class / Course] · [Date]</i>
+h2:Introduction
+p:[Hook, background and your main argument (thesis).]
+h2:Body Paragraph 1
+p:[Point, evidence, explanation.]
+h2:Body Paragraph 2
+p:[Point, evidence, explanation.]
+h2:Body Paragraph 3
+p:[Counter-argument and your response.]
+h2:Conclusion
+p:[Restate the thesis, summarise, end with a strong closing thought.]`);
+
+/* Planning */
+add('Planning','Weekly Planner',`h1:Weekly Planner
+p:<b>Week:</b> [Date] – [Date] · <b>Top 3 goals:</b> [1] · [2] · [3]
+t:Day|Morning|Afternoon|Evening|Notes//Monday|..|..|..|..//Tuesday|..|..|..|..//Wednesday|..|..|..|..//Thursday|..|..|..|..//Friday|..|..|..|..//Saturday|..|..|..|..//Sunday|..|..|..|..
+h2:To-do
+chk:[Task]|[Task]|[Task]|[Task]
+h2:Reflection
+p:[Wins, lessons, changes for next week.]`);
+add('Planning','Budget Planner',`h1:Monthly Budget Planner – [Month Year]
+h2:Income
+t:Source|Planned (₹)|Actual (₹)//[Salary]|[0]|[0]//[Other]|[0]|[0]//<b>Total income</b>|<b>[0]</b>|<b>[0]</b>
+h2:Expenses
+t:Category|Planned (₹)|Actual (₹)|Difference//Rent / EMI|[0]|[0]|[0]//Food & groceries|[0]|[0]|[0]//Transport|[0]|[0]|[0]//Bills & utilities|[0]|[0]|[0]//Education|[0]|[0]|[0]//Health|[0]|[0]|[0]//Shopping & fun|[0]|[0]|[0]//Savings & investments|[0]|[0]|[0]//<b>Total</b>|<b>[0]</b>|<b>[0]</b>|<b>[0]</b>
+p:<b>Balance (Income − Expenses):</b> ₹[0]
+h3:Savings Goal
+p:[Goal] – target ₹[Amount] by [Date]`);
+add('Planning','Checklist',`h1:Checklist – [Title]
+p:<b>Owner:</b> [Name] · <b>Due:</b> [Date]
+h2:Before you start
+chk:[Item]|[Item]|[Item]
+h2:Main tasks
+chk:[Item]|[Item]|[Item]|[Item]|[Item]
+h2:Final review
+chk:[Item]|[Item]|[Item]
+h2:Notes
+p:[Anything to remember.]`);
+add('Planning','Meeting Minutes',`h1:Meeting Minutes
+k:Meeting|[Title]//Date & time|[Date], [Time]//Location|[Room / Link]//Chair|[Name]//Minutes by|[Name]
+h2:Attendees
+p:Present: [Names]<br>Absent: [Names]
+h2:Agenda & Discussion
+t:Topic|Discussion|Decision//[Topic 1]|[Summary]|[Decision]//[Topic 2]|[Summary]|[Decision]
+h2:Action Items
+t:Action|Owner|Due date|Status//[Task]|[Name]|[Date]|Open
+p:<b>Next meeting:</b> [Date, Time]`);
+add('Planning','Newsletter',`c:<b style='font-size:30px'>[Newsletter Name]</b><br><i>[Month Year] · Issue [#]</i>
+h2:From the Editor
+p:[Short welcome note.]
+h2:Top Story
+p:[Headline and 3–4 lines.]
+h2:Updates
+ul:[Update 1]|[Update 2]|[Update 3]
+h2:Upcoming Events
+t:Date|Event|Where//[Date]|[Event]|[Place]
+h2:Spotlight
+p:[Team member, client or customer story.]
+h2:Tip of the Month
+q:[Short helpful tip.]
+c:Follow us: [links] · Contact: [email]`);
+add('Planning','Certificate of Appreciation',`<div style='border:8px double #b8860b;padding:40px 24px;text-align:center'><h1 style='color:#b8860b;font-size:36px;margin-top:0'>Certificate of Appreciation</h1><p>This certificate is proudly presented to</p><h2 style='font-size:30px'>[Recipient Name]</h2><p>in recognition of outstanding [work / contribution / achievement] in <b>[Reason]</b>.</p><p><br></p><p>Date: [Date]</p><p><br>______________________ &nbsp;&nbsp;&nbsp;&nbsp; ______________________<br><b>[Name]</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>[Name]</b><br>[Designation] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Designation]</p></div><p><br></p>`);
+
+/* template gallery */
+let tcat='All',tmore=false;
+function tplRender(){const cats=['All',...Object.keys(TC)];
+ $('tpl').innerHTML='<div class="cats">'+cats.map(c=>`<button class="${c===tcat?'on':''}" data-cat="${c}">${c}</button>`).join('')+'</div><div class="tg'+(tmore?'':' cl')+'">'+cats.slice(1).filter(c=>tcat==='All'||c===tcat).map(c=>TC[c].map(n=>`<div class="tc" data-t="${esc(n)}"><div>${n==='Blank'?'+':TI[c]}</div><span>${esc(n)}</span></div>`).join('')).join('')+'</div><button class="tmb" id="tmb">'+(tmore?'Show less ▲':'Show more ▼')+'</button>';requestAnimationFrame(()=>{const g=$('tpl').querySelector('.tg'),b=$('tmb');if(g&&b&&!tmore&&g.scrollHeight<=g.clientHeight+4)b.style.display='none'})}
+$('tpl').addEventListener('click',e=>{const c=e.target.closest('[data-cat]');if(e.target.id==='tmb'){tmore=!tmore;tplRender();return}if(c){tcat=c.dataset.cat;tplRender()}});
+const _home=home;home=function(){_home();tplRender()};
+$('hm').onclick=()=>home();$('hs').oninput=()=>home();
 home();
 </script>
 </body>
